@@ -202,7 +202,7 @@ def set_globals
   @git_origin = git_generate_origin(@user, @repo_name) if @create || @migrate
   @git_origin_url = git_generate_origin_url(@user, @repo_name) if @create || @migrate
   
-  puts_title "Parameters: "
+  puts_title "Parameters"
   puts "working in: " + Dir.pwd.c(93)
   puts "repo name: "+ @repo_name.to_s.c(93)
   puts "provider: " + @repo_provider.to_s.c(93)
