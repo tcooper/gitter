@@ -6,8 +6,10 @@ Built on REST APIs from GitHub API v3 and BitBucket API v1.0
 
 Feel free to fork and conribute!!
 
+##Screenshots:
 
-##Usage
+
+##Usage:
     Usage: gitter [options]
     -n, --name=MANDATORY             Set the name of the new repo
     -r, --repo-hub=MANDATORY         Where do you want this repo? GitHub = g, Bitbucket = b
