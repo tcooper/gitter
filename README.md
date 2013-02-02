@@ -6,8 +6,6 @@ Built on REST APIs from GitHub API v3 and BitBucket API v1.0
 
 Feel free to fork and conribute!!
 
-Originally -- by Dave Deriso -- deriso@gmail.com
-
 ##Screenshots:
 
 ###Options
