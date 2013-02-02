@@ -18,7 +18,7 @@ Feel free to fork and conribute!!
     -h, --help                       Prints this little guide
 
 ##Examples:
-    create new repo: 				```shell gitter -c -r b -l javascript -n node_app```
+    create new repo: 				```gitter -c -r b -l javascript -n node_app```
     migrate existing to GitHub: 	```shell gitter -m -r g -n node_app```
     create repo and migrate to it: 	```shell gitter -c -m -r b -l javascript -n node_app```
     update any repo: 				```shell gitter -u```
