@@ -8,12 +8,16 @@ Feel free to fork and conribute!!
 
 ##Screenshots:
 
-####Options
-![solarized vim](https://github.com/dderiso/gitter/raw/master/img/screenshots_for_github/2.png)
-####Create
-![solarized vim](https://github.com/dderiso/gitter/raw/master/img/screenshots_for_github/3.png)
-####Update
-![solarized vim](https://github.com/dderiso/gitter/raw/master/img/screenshots_for_github/1.png)
+###Options
+![options](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/options.png)
+###Create
+![create](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/create.png)
+![create2](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/create2.png)
+###Update
+![update](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/update.png)
+###Migrate
+![migrate](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/migrate.png)
+![migrate2](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/migrate2.png)
 
 ##Usage:
     Usage: gitter [options]
