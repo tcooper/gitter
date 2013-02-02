@@ -4,7 +4,7 @@ A lazy way to create, migrate, and update repos on GitHub and BitBucket.
 
 Built on REST APIs from GitHub API v3 and BitBucket API v1.0
 
-Feel free to fork and comment, contribute, fork, spoon, or spatula...especially if there's a better way of doing something!!!
+Feel free to fork, comment, contribute, spoon, or spatula...especially if there's a better way of doing something!!!
 
 ##Screenshots:
 
