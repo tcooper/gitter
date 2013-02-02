@@ -17,7 +17,7 @@ Originally -- by Dave Deriso -- deriso@gmail.com
 ![create2](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/create2.png)
 ###Update
 ![update](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/update.png)
-###Migrate
+###Migrate from one Repo Provider to Another
 ![migrate](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/migrate.png)
 ![migrate2](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/migrate2.png)
 
