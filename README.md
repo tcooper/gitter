@@ -6,6 +6,8 @@ Built on REST APIs from GitHub API v3 and BitBucket API v1.0
 
 Feel free to fork and conribute!!
 
+Originally -- by Dave Deriso -- deriso@gmail.com
+
 ##Screenshots:
 
 ###Options
@@ -37,10 +39,9 @@ Feel free to fork and conribute!!
     update any repo: 				gitter -u
 
 ##Notes:
-* You will prompted for your Github/BitBucket password
+* You will prompted for your Github/BitBucket password, but it wont print out or be saved in history
 * Username for repo is ($USER) by default, you can change this on line 8
 * New repos are private by default
 * Doesn't like symbols for language (ex. use 'c' instead of 'c++')
 * Updating a repo has commit message 'updates via gitter' by default
 
-Originally -- by Dave Deriso -- deriso@gmail.com
