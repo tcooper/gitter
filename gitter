@@ -67,7 +67,7 @@ def get_options
     opts.on('-m', '--migrate', String, 'Migrate existing repo to new provider') { @migrate = true; n_options+=1 }
     opts.on('-u', '--update', 'Update existing repo with default commit message') { n_options+=1 }
     opts.on('-l', '--language=MANDATORY', String, 'Set language of the new repo') { |value| @language = value.strip.downcase; n_options+=1 }
-    opts.on('-d', '--debug', 'Print commands for inspection, don\'t actually run them') { @debug = true; n_options+=1 }
+    opts.on('-d', '--debug', 'Print commands for inspection, doesn\'t actually run them') { @debug = true; n_options+=1 }
     opts.on_tail('-h', '--help', 'Prints this little guide') { show_options = true; n_options+=1 }
     @opts = opts
   end.parse!

@@ -27,7 +27,7 @@ Feel free to fork, comment, contribute, spoon, or spatula...especially if there'
     -m, --migrate                    Migrate existing repo to new provider
     -u, --update                     Update existing repo with default commit message
     -l, --language=MANDATORY         Set language of the new repo
-    -d, --debug                      Print commands for inspection, don't actually run them
+    -d, --debug                      Print commands for inspection, doesn't actually run them
     -h, --help                       Prints this little guide
 
 ##Examples:
