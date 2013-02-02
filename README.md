@@ -8,6 +8,12 @@ Feel free to fork and conribute!!
 
 ##Screenshots:
 
+####Options
+![solarized vim](https://github.com/dderiso/gitter/raw/master/img/screenshots_for_github/2.png)
+####Create
+![solarized vim](https://github.com/dderiso/gitter/raw/master/img/screenshots_for_github/3.png)
+####Update
+![solarized vim](https://github.com/dderiso/gitter/raw/master/img/screenshots_for_github/1.png)
 
 ##Usage:
     Usage: gitter [options]
