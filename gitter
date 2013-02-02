@@ -107,19 +107,23 @@ end
 # git helper methods
 
 def gitter(user, pw, repo)
-  if @repo_provider=="GitHub"
-    #curl -u 'USER:PASS' https://api.github.com/user/repos -d '{"name":"REPO"}'
-    %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[", "private": true}']
+  #curl -u 'USER:PASS' https://api.github.com/user/repos -d '{"name":"REPO"}'
+  #curl -u $BB_USER:$BB_PASS -X POST https://api.bitbucket.org/1.0/repositories  -d "name=$PROJECT&scm=git"
+  
+  if @repo_provider=="GitHub"     
+     if @language
+       %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[","private":true,"language":"] + @language + %q["}']
+     else
+       %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[","private":true}']
+     end
   elsif @repo_provider=="BitBucket"
-    #curl -k -X POST --user user:pass "https://api.bitbucket.org/1.0/repositories" -d "name=project_name" is_private=true
-    #curl -u $BB_USER:$BB_PASS -X POST https://api.bitbucket.org/1.0/repositories  -d "name=$PROJECT&scm=git"
-    
-    if @language
-      %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=true&language=] + @language + %q["]
-    else
-      %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=true"]
-    end
+     if @language
+       %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=true&language=] + @language + %q["]
+     else
+       %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=true"]
+     end
   end
+  
 end
 
 def git_init
