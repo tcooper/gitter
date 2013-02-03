@@ -16,7 +16,8 @@
 @create = false
 @migrate = false
 @update = true
-@update_message = "updates via gitter"
+@update_message_default = "updates via gitter"
+@update_message = @update_message_default
 @debug = false
 @done = false
 
@@ -61,12 +62,12 @@ def get_options
   OptionParser.new do |opts|
     opts.banner = @sep +"\nUsage: gitter [options]\n".c(36)
     opts.version = @version
-    opts.on('-n', '--name=MANDATORY', String, 'Set the name of the new repo') { |value| @repo_name = value; n_options+=1 }
-    opts.on('-r', '--repo-hub=MANDATORY', String, 'Where do you want this repo? GitHub = g, Bitbucket = b') { |value| providers = { "g" => "GitHub", "b" => "BitBucket"}; @repo_provider = providers[value]; n_options+=1 }
+    opts.on('-n', '--name [name]', String, 'Set the name of the new repo') { |value| @repo_name = value; n_options+=1 }
+    opts.on('-r', '--repo-hub [provider]', String, 'Where do you want this repo? GitHub = g, Bitbucket = b') { |value| providers = { "g" => "GitHub", "b" => "BitBucket"}; @repo_provider = providers[value]; n_options+=1 }
     opts.on('-c', '--create', String, 'Create new repo') { @create = true; n_options+=1 }
     opts.on('-m', '--migrate', String, 'Migrate existing repo to new provider') { @migrate = true; n_options+=1 }
-    opts.on('-u', '--update', 'Update existing repo with default commit message') { n_options+=1 }
-    opts.on('-l', '--language=MANDATORY', String, 'Set language of the new repo') { |value| @language = value.strip.downcase; n_options+=1 }
+    opts.on('-u', '--update [optional message]', 'Update existing repo with default commit message') { |value| @update_message = value || @update_message_default; n_options+=1; }
+    opts.on('-l', '--language [language]', String, 'Set language of the new repo') { |value| @language = value.strip.downcase; n_options+=1 }
     opts.on('-d', '--debug', 'Print commands for inspection, doesn\'t actually run them') { @debug = true; n_options+=1 }
     opts.on_tail('-h', '--help', 'Prints this little guide') { show_options = true; n_options+=1 }
     @opts = opts
@@ -203,6 +204,7 @@ def set_globals
   @git_origin_url = git_generate_origin_url(@user, @repo_name) if @create || @migrate
   
   puts_title "Parameters"
+  #puts "commit message:" + MESSAGE
   puts "working in: " + Dir.pwd.c(93)
   puts "repo name: "+ @repo_name.to_s.c(93)
   puts "provider: " + @repo_provider.to_s.c(93)
