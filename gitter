@@ -20,6 +20,7 @@
 @update_message = @update_message_default
 @debug = false
 @done = false
+@error = false
 
 #----------------------------------------------------------------------
 #fancy schmancy color scheme
@@ -181,21 +182,40 @@ def git_update_server_info
   "git update-server-info"
 end
 
+def git_list_origin
+  "git config remote.origin.url"
+end
+
+# error checks
+
 def has_repo
   File.exist?('.git')
 end
 
-def has_repo_or_error
-  result = has_repo
-  if !result
-    puts "Error: no .git folder in current directory".c(91)
+def has_repo_or_error(show_error)
+  @repo_exists = has_repo
+  if !@repo_exists
+    puts "Error: no .git folder in current directory".c(91) if show_error
+    @error = true
   end
-  result
 end
 
-def git_list_origin
-  "git config remote.origin.url"
+def has_repo_name_or_error(show_error)
+  @repo_name_exists = !(defined?(@repo_name)).nil?
+  if !@repo_name_exists
+    puts "Error: repo name missing (-n your_name_here)".c(91) if show_error
+    @error = true
+  end
 end
+
+def has_repo_provider_or_error(show_error)
+  @repo_provider_exits = !(defined?(@repo_provider)).nil?
+  if !@repo_provider_exits
+    puts "Error: repo provider missing (-p [b or g])".c(91) if show_error
+    @error = true
+  end
+end
+
 
 #----------------------------------------------------------------------
 # main methods
@@ -208,30 +228,34 @@ def run(commands)
 end
 
 def set_globals
-  @git_origin = git_generate_origin(@user, @repo_name) if @create || @migrate
-  @git_origin_url = git_generate_origin_url(@user, @repo_name) if @create || @migrate
   
   puts_title "Parameters"
-  #puts "commit message:" + MESSAGE
+  
+  @git_origin = git_generate_origin(@user, @repo_name)
+  @git_origin_url = git_generate_origin_url(@user, @repo_name)
+  
+  puts "debug: " + @debug.to_s.c(93)
   puts "working in: " + Dir.pwd.c(93)
-  puts "repo name: "+ @repo_name.to_s.c(93)
-  puts "provider: " + @repo_provider.to_s.c(93)
   puts "create: " + @create.to_s.c(93)
   puts "migrate: " + @migrate.to_s.c(93)
   puts "update: " + @update.to_s.c(93)
   puts "language: " + @language.to_s.c(93)
   puts "git exists: " + has_repo.to_s.c(93)
+  puts "repo name: "+ @repo_name.to_s.c(93)
+  puts "provider: " + @repo_provider.to_s.c(93)
   puts "origin url: " + @git_origin_url.to_s.c(93)
   puts "origin: " + @git_origin.to_s.c(93)
-  puts "debug: " + @debug.to_s.c(93)
 end
 
 def migrate_repo
     
   puts_title "Migrating Repo to #{@repo_provider}"
   
-  # check for .git repo
-  @migrate = has_repo_or_error
+  #error checks
+  has_repo_or_error(true)
+  has_repo_name_or_error(true)
+  has_repo_provider_or_error(true)
+  goodbye if @error
   
   commands = [
     git_list_origin,
@@ -240,14 +264,16 @@ def migrate_repo
     git_update_server_info
   ]
   
-  run commands if @migrate
+  run commands
 end
 
 def prune_repo_after_migrate
   puts_title "Pruning Origin after Migrating to #{@repo_provider}"
   
-  # check for .git repo
-  @migrate = has_repo_or_error
+  #error checks
+  has_repo_or_error(true)
+  goodbye if @error
+  
   
   commands = [
     git_push,
@@ -262,6 +288,14 @@ end
 
 def create_repo
   puts_title "Creating"
+  
+  #error checks
+  has_repo_name_or_error(true)
+  has_repo_provider_or_error(true)
+  goodbye if @error
+  
+  
+  # get password
   puts "#{@repo_provider} U: " + @user
   print "#{@repo_provider} P: "
   #pass = STDIN.gets.strip() #remove whitespace at end
@@ -276,7 +310,7 @@ def create_repo
     git_add_files
   ]
   
-  commands << git_commit("First commit! Hooray!!") unless @migrate || has_repo
+  commands << git_commit("First commit! Hooray!!") unless @migrate
   commands << git_push 
   
   run commands
@@ -293,8 +327,9 @@ end
 def update_repo
   puts_title "Updating"
   
-  # check for .git repo
-  @update = has_repo_or_error
+  #error checks
+  has_repo_or_error(true)
+  goodbye if @error
   
   commands = [
     git_add_files,
