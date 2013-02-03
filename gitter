@@ -185,6 +185,14 @@ def has_repo
   File.exist?('.git')
 end
 
+def has_repo_or_error
+  result = has_repo
+  if !result
+    puts "Error: no .git folder in current directory".c(91)
+  end
+  result
+end
+
 def git_list_origin
   "git config remote.origin.url"
 end
@@ -223,11 +231,7 @@ def migrate_repo
   puts_title "Migrating Repo to #{@repo_provider}"
   
   # check for .git repo
-  if !has_repo
-    puts "Error - could not migrate: no .git folder in current directory".c(91)
-    @migrate = false
-    return
-  end
+  @migrate = has_repo_or_error
   
   commands = [
     git_list_origin,
@@ -236,18 +240,14 @@ def migrate_repo
     git_update_server_info
   ]
   
-  run commands
+  run commands if @migrate
 end
 
 def prune_repo_after_migrate
   puts_title "Pruning Origin after Migrating to #{@repo_provider}"
   
   # check for .git repo
-  if !has_repo
-    puts "Error - could not migrate: no .git folder in current directory".c(91)
-    @migrate = false
-    return
-  end
+  @migrate = has_repo_or_error
   
   commands = [
     git_push,
@@ -256,7 +256,7 @@ def prune_repo_after_migrate
     git_push
   ]
   
-  run commands
+  run commands if @migrate
   
 end
 
@@ -294,11 +294,7 @@ def update_repo
   puts_title "Updating"
   
   # check for .git repo
-  if !has_repo
-    puts "Error - could not update: no .git folder in current directory".c(91)
-    @update = false
-    return
-  end
+  @update = has_repo_or_error
   
   commands = [
     git_add_files,
@@ -306,7 +302,7 @@ def update_repo
     git_push
   ]
   
-  run commands
+  run commands if @update
   
   #  git add *
   #  git commit -a -m "updates"
