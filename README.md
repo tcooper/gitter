@@ -19,7 +19,7 @@ Feel free to fork, comment, contribute, spoon, or spatula...especially if there'
 
 ##Usage:
     Usage: gitter [options]
-	-n, --name [name]                Set the name of the new repo
+	    -n, --name [name]                Set the name of the new repo
 	    -r, --repo-hub [provider]        Where do you want this repo? GitHub = g, Bitbucket = b
 	    -c, --create                     Create new repo
 	    -m, --migrate                    Migrate existing repo to new provider
@@ -29,10 +29,10 @@ Feel free to fork, comment, contribute, spoon, or spatula...especially if there'
 	    -h, --help                       Prints this little guide
 
 ##Examples:
-    create new repo: 		gitter -c -r b -l javascript -n node_app
+    create new repo: 				gitter -c -r b -l javascript -n node_app
     migrate existing to GitHub: 	gitter -m -r g -n node_app
     create repo and migrate to it: 	gitter -c -m -r b -l javascript -n node_app
-    update any repo: 		gitter -u "made it work" or gitter -u
+    update any repo: 				gitter -u "made it work" or gitter -u
 
 ##Notes:
 * You will prompted for your Github/BitBucket password, but it wont print out or be saved in history
