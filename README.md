@@ -12,7 +12,7 @@ Feel free to fork, comment, contribute, spoon, or spatula...especially if there'
 ![create2](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/create2.png)
 ###Update
 ![update](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/update.png)
-####Note, you can also specify a custom message or leave blank for default "updates via gitter"
+Note, you can also specify a custom message or leave blank for the default commit message: "updates via gitter"
 ###Migrate from one Repo Provider to Another
 ![migrate](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/migrate.png)
 ![migrate2](https://github.com/dderiso/gitter/raw/master/screenshots_for_github/migrate2.png)
