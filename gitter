@@ -66,7 +66,7 @@ def get_options
     opts.on('-r', '--repo-hub [provider]', String, 'Where do you want this repo? GitHub = g, Bitbucket = b') { |value| providers = { "g" => "GitHub", "b" => "BitBucket"}; @repo_provider = providers[value]; n_options+=1 }
     opts.on('-c', '--create', String, 'Create new repo') { @create = true; n_options+=1 }
     opts.on('-m', '--migrate', String, 'Migrate existing repo to new provider') { @migrate = true; n_options+=1 }
-    opts.on('-u', '--update [optional message]', 'Update existing repo with default commit message') { |value| @update_message = value || @update_message_default; n_options+=1; }
+    opts.on('-u', '--update [optional message]', 'Update existing repo with custom or default commit message') { |value| @update_message = value || @update_message_default; n_options+=1; }
     opts.on('-l', '--language [language]', String, 'Set language of the new repo') { |value| @language = value.strip.downcase; n_options+=1 }
     opts.on('-d', '--debug', 'Print commands for inspection, doesn\'t actually run them') { @debug = true; n_options+=1 }
     opts.on_tail('-h', '--help', 'Prints this little guide') { show_options = true; n_options+=1 }
@@ -79,7 +79,7 @@ def get_options
     puts "create new repo: " + "\t\tgitter -c -r b -l javascript -n node_app".c(93)
     puts "migrate existing to GitHub: " + "\tgitter -m -r g -n node_app".c(93)
     puts "create repo and migrate to it: " + "\tgitter -c -m -r b -l javascript -n node_app".c(93)
-    puts "update any repo: " + "\t\tgitter -u".c(93)
+    puts "update any repo: " + "\t\tgitter -u \"made it work\"".c(93) + " or " + "gitter -u".c(93)
     puts "\nNotes:".c(36)
     puts "You will prompted for your Github/BitBucket password"
     puts "Username for repo is #{@user} ($USER) by default, you can change this on line 8"
