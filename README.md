@@ -1,4 +1,5 @@
 #A Pretty CLI for GitHub & BitBucket
+###Two Services with One CLI
 
 Simple, colorful CLI for creating, migrating, and updating repos on GitHub and BitBucket.
 
