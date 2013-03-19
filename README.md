@@ -1,12 +1,12 @@
-#CLI for GitHub & BitBucket -- v.0.1
+#CLI for GitHub & BitBucket
 
 Simple, colorful CLI for creating, migrating, and updating repos on GitHub and BitBucket.
 
 Built on REST APIs from GitHub API v3 and BitBucket API v1.0. Written in Ruby.
 
-Feel free to fork, comment, contribute, spoon, or spatula...
+Gladly taking feature requests!  Feel free to fork, comment, contribute, spoon, or spatula...
 
-Gladly taking feature requests!
+Current version: v.0.1
 
 ##Screenshots:
 ###Create
