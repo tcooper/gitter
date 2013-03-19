@@ -1,4 +1,4 @@
-#Pretty CLI for GitHub & BitBucket
+#A Pretty CLI for GitHub & BitBucket
 
 Simple, colorful CLI for creating, migrating, and updating repos on GitHub and BitBucket.
 
