@@ -15,7 +15,7 @@
 #some global params
 @create = false
 @migrate = false
-@update = true
+@update = false
 @update_message_default = "updates via gitter"
 @update_message = @update_message_default
 @debug = false
@@ -68,7 +68,7 @@ def get_options
     opts.on('-r', '--repo-hub [provider]', String, 'Where do you want this repo? GitHub = g, Bitbucket = b') { |value| providers = { "g" => "GitHub", "b" => "BitBucket"}; @repo_provider = providers[value]; n_options+=1 }
     opts.on('-c', '--create', String, 'Create new repo') { @create = true; n_options+=1 }
     opts.on('-m', '--migrate', String, 'Migrate existing repo to new provider') { @migrate = true; n_options+=1 }
-    opts.on('-u', '--update [optional message]', 'Update existing repo with custom or default commit message') { |value| @update_message = value || @update_message_default; n_options+=1; }
+    opts.on('-u', '--update [optional message]', 'Update existing repo with custom or default commit message') { |value| @update_message = value || @update_message_default; @update = true; n_options+=1; }
     opts.on('-l', '--language [language]', String, 'Set language of the new repo') { |value| @language = value.strip.downcase; n_options+=1 }
     opts.on('-p', '--print', String, 'Pretty print log') { @print = true; n_options+=1 }
     opts.on('-d', '--debug', 'Print commands for inspection, doesn\'t actually run them') { @debug = true; n_options+=1 }
@@ -251,7 +251,7 @@ def set_globals
   puts "provider: " + @repo_provider.to_s.c(93)
   puts "origin url: " + @git_origin_url.to_s.c(93)
   puts "origin: " + @git_origin.to_s.c(93)
-  puts "print: " + @print.to_s.c(93)
+  puts "pretty print log: " + @print.to_s.c(93)
 end
 
 def migrate_repo
@@ -354,18 +354,23 @@ def update_repo
   # you don't want this to bog down the connection, or lose the neat progress log on the console
 end
 
+def pretty_log
+  puts_title "Commit Log"
+  run([git_log_pretty_print])
+end
+
 #----------------------------------------------------------------------
 #sequence control
 hello
 get_options
 
 #do stuff
-git_log_pretty_print if @print
 set_globals
 migrate_repo if @migrate
 create_repo if @create
 update_repo if @update
 prune_repo_after_migrate if @migrate
+pretty_log if @print
 
 #peace out
 goodbye
