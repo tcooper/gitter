@@ -20,7 +20,7 @@
 @update_message = @update_message_default
 @debug = false
 @done = false
-@print = true
+@print = false
 @error = false
 
 #----------------------------------------------------------------------
