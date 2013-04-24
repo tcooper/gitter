@@ -360,8 +360,8 @@ hello
 get_options
 
 #do stuff
-set_globals
 git_log_pretty_print if @print
+set_globals
 migrate_repo if @migrate
 create_repo if @create
 update_repo if @update
