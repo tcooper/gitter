@@ -20,6 +20,7 @@
 @update_message = @update_message_default
 @debug = false
 @done = false
+@print = true
 @error = false
 
 #----------------------------------------------------------------------
@@ -69,6 +70,7 @@ def get_options
     opts.on('-m', '--migrate', String, 'Migrate existing repo to new provider') { @migrate = true; n_options+=1 }
     opts.on('-u', '--update [optional message]', 'Update existing repo with custom or default commit message') { |value| @update_message = value || @update_message_default; n_options+=1; }
     opts.on('-l', '--language [language]', String, 'Set language of the new repo') { |value| @language = value.strip.downcase; n_options+=1 }
+    opts.on('-p', '--print', String, 'Pretty print log') { @print = true; n_options+=1 }
     opts.on('-d', '--debug', 'Print commands for inspection, doesn\'t actually run them') { @debug = true; n_options+=1 }
     opts.on_tail('-h', '--help', 'Prints this little guide') { show_options = true; n_options+=1 }
     @opts = opts
@@ -138,6 +140,10 @@ def git_generate_origin(user, repo)
   elsif @repo_provider=="BitBucket"
     "git@bitbucket.org:" + @user + "/#{repo}.git"
   end
+end
+
+def git_log_pretty_print
+  %q[git log --pretty=format:"%h - %an, %ar : %s" --graph]
 end
 
 def git_generate_origin_url(user, repo)
@@ -245,6 +251,7 @@ def set_globals
   puts "provider: " + @repo_provider.to_s.c(93)
   puts "origin url: " + @git_origin_url.to_s.c(93)
   puts "origin: " + @git_origin.to_s.c(93)
+  puts "print: " + @print.to_s.c(93)
 end
 
 def migrate_repo
@@ -354,6 +361,7 @@ get_options
 
 #do stuff
 set_globals
+git_log_pretty_print if @print
 migrate_repo if @migrate
 create_repo if @create
 update_repo if @update
