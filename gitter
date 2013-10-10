@@ -86,7 +86,7 @@ def get_options
     puts "\nNotes:".c(36)
     puts "You will prompted for your Github/BitBucket password"
     puts "Username for repo is #{@user} ($USER) by default, you can change this on line 8"
-    puts "New repos are private by default"
+    puts "New repos are public by default"
     puts "Doesn\'t like symbols for language (ex. use \'c\' instead of \'c++\')"
     puts "Updating a repo has commit message \'#{@update_message}'\ by default"
     puts @sep
@@ -116,15 +116,15 @@ def gitter(user, pw, repo)
   
   if @repo_provider=="GitHub"     
      if @language
-       %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[","private":true,"language":"] + @language + %q["}']
+       %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[","private":false,"language":"] + @language + %q["}']
      else
-       %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[","private":true}']
+       %q[curl -u ] + user + ":" + pw + %q[ https://api.github.com/user/repos -d '{"name":"] + repo + %q[","private":false}']
      end
   elsif @repo_provider=="BitBucket"
      if @language
-       %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=true&language=] + @language + %q["]
+       %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=false&language=] + @language + %q["]
      else
-       %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=true"]
+       %q[curl -u ] + user + ":" + pw + %q[ -X POST https://api.bitbucket.org/1.0/repositories -d "name=] + repo + %q[&scm=git&is_private=false"]
      end
   end
   
